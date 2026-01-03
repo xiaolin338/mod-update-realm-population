@@ -1,0 +1,19 @@
+[worldserver]
+###################################################################################################
+# MOD-UPDATE-REALM-POPULATION 配置
+#
+#    启用/禁用服务器人口更新模块
+#        Default: 1 - 启用
+#                 0 - 禁用
+#
+#    ModUpdateRealmPopulation.Enable = 1
+
+ModUpdateRealmPopulation.Enable = 1
+
+#
+#    人口更新间隔（分钟）
+#        Default: 2 - 每2分钟更新一次
+#
+#    ModUpdateRealmPopulation.UpdateInterval = 2
+
+ModUpdateRealmPopulation.UpdateInterval = 2
