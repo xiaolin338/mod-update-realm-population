@@ -12,8 +12,8 @@ ModUpdateRealmPopulation.Enable = 1
 
 #
 #    人口更新间隔（分钟）
-#        Default: 2 - 每2分钟更新一次
+#        Default: 1 - 每2分钟更新一次
 #
-#    ModUpdateRealmPopulation.UpdateInterval = 2
+#    ModUpdateRealmPopulation.UpdateInterval = 1
 
-ModUpdateRealmPopulation.UpdateInterval = 2
+ModUpdateRealmPopulation.UpdateInterval = 1
