@@ -1,4 +1,3 @@
-
 #include "mod-update-realm-population.h"
 #include "World.h"
 #include "WorldSessionMgr.h"
@@ -14,7 +13,7 @@ void ModUpdateRealmPopulation::OnAfterConfigLoad(bool reload)
     // 读取配置
     _enabled = sConfigMgr->GetOption<bool>("ModUpdateRealmPopulation.Enable", true);
     _updateInterval = sConfigMgr->GetOption<uint32>("ModUpdateRealmPopulation.UpdateInterval", 2); // 分钟
-
+    _usePlayerCount = sConfigMgr->GetOption<bool>("ModUpdateRealmPopulation.UsePlayerCount", false);
     if (reload)
     {
         //LOG_INFO("module", "ModUpdateRealmPopulation: Configuration reloaded.");
@@ -58,7 +57,21 @@ void ModUpdateRealmPopulation::OnUpdate(uint32 diff)
 
         if (pLimit > 0)
         {
-            float population = sWorldSessionMgr->GetActiveSessionCount();
+            float population = 0.0f;
+
+             if (_usePlayerCount)
+            {
+                population = sWorldSessionMgr->GetPlayerCount();
+                //population = static_cast<float>(sWorldSessionMgr->GetPlayerCount());
+                //LOG_DEBUG("module", "ModUpdateRealmPopulation: Using player count: {}", population);
+            }
+            else
+            {
+                population = sWorldSessionMgr->GetActiveSessionCount();
+               // population = static_cast<float>(sWorldSessionMgr->GetActiveSessionCount());
+                //LOG_DEBUG("module", "ModUpdateRealmPopulation: Using active sessions: {}", population);
+            }
+           // float population = sWorldSessionMgr->GetActiveSessionCount();
            // population /= pLimit;
            // population *= 2;
 
