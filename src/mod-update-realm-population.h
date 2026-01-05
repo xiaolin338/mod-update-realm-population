@@ -16,6 +16,7 @@ private:
     IntervalTimer _populationTimer;
     uint32 _updateInterval;
     bool _enabled;
+    bool _usePlayerCount;
 };
 
 #endif // MOD_UPDATE_REALM_POPULATION_H
