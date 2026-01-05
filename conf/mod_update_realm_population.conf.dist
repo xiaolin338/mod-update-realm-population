@@ -12,8 +12,21 @@ ModUpdateRealmPopulation.Enable = 1
 
 #
 #    人口更新间隔（分钟）
-#        Default: 1 - 每1分钟更新一次
+#        Default: 2 - 每2分钟更新一次
 #
-#    ModUpdateRealmPopulation.UpdateInterval = 1
+#    ModUpdateRealmPopulation.UpdateInterval = 2
 
 ModUpdateRealmPopulation.UpdateInterval = 1
+
+#
+#    人口统计方式
+#        Default: 0 - 使用活跃会话数 (GetActiveSessionCount())
+#                 1 - 使用玩家总数 (GetPlayerCount())
+#
+#    说明：
+#        0 (默认): 使用 sWorldSessionMgr->GetActiveSessionCount() - 活跃会话数
+#        1       : 使用 sWorldSessionMgr->GetPlayerCount() - 当前在线玩家数
+#
+#    ModUpdateRealmPopulation.UsePlayerCount = 0
+
+ModUpdateRealmPopulation.UsePlayerCount = 1
