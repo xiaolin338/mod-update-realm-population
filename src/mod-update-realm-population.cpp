@@ -8,6 +8,17 @@
 
 extern Realm realm;
 
+uint32 GetTotalCharacterCount()
+{
+    QueryResult result = CharacterDatabase.Query("SELECT COUNT(*) FROM characters");
+    if (result)
+    {
+        Field* fields = result->Fetch();
+        return fields[0].Get<uint32>();  // 修正这里
+    }
+    return 0;
+}
+
 void ModUpdateRealmPopulation::OnAfterConfigLoad(bool reload)
 {
     // 读取配置
@@ -83,6 +94,38 @@ void ModUpdateRealmPopulation::OnUpdate(uint32 diff)
            // LOG_INFO("module", "ModUpdateRealmPopulation: Updating realm population: active sessions={}, limit={}, population={}",sWorldSessionMgr->GetActiveSessionCount(), pLimit, population);
 
             LoginDatabase.Execute("UPDATE realmlist SET population = {} WHERE id = '{}'", population, realm.Id.Realm);
+
+            if (_updateFlag)
+            {
+                uint32 characterCount = GetTotalCharacterCount();
+                uint32 flag = 0;
+
+                if (characterCount == 0)
+                {
+                    flag = 64;
+                    //LOG_DEBUG("module", "ModUpdateRealmPopulation: Character count is 0, setting flag to 64");
+                }
+                else if (population < 0.5f)
+                {
+                    flag = 32;
+                    //LOG_DEBUG("module", "ModUpdateRealmPopulation: Population ({}) < 0.5, setting flag to 32", population);
+                }
+                else if (population > 1.9f)
+                {
+                    flag = 128;
+                    //LOG_DEBUG("module", "ModUpdateRealmPopulation: Population ({}) >= 2.0, setting flag to 128", population);
+                }
+                else
+                {
+                    //LOG_DEBUG("module", "ModUpdateRealmPopulation: No flag update conditions met. Character count: {}, Population: {}",characterCount, population);
+                    return; // 条件不满足时不更新flag
+                }
+
+                // 执行flag更新
+                LoginDatabase.Execute("UPDATE realmlist SET flag = {} WHERE id = '{}'", flag, realm.Id.Realm);
+                //LOG_INFO("module", "ModUpdateRealmPopulation: Updated realm flag to {} for realm id {}", flag, realm.Id.Realm);
+            }
+
         }
     }
 }
