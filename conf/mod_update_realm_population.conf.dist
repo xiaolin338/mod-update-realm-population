@@ -30,3 +30,18 @@ ModUpdateRealmPopulation.UpdateInterval = 1
 #    ModUpdateRealmPopulation.UsePlayerCount = 0
 
 ModUpdateRealmPopulation.UsePlayerCount = 1
+
+#
+#    是否更新realmlist的flag字段
+#        Default: 0 - 不更新flag
+#                 1 - 根据条件更新flag
+#
+#    说明：
+#        当此选项启用时，系统会根据以下条件自动更新flag：
+#        1. 角色总数为0时：flag = 64
+#        2. 人口低于0.5时：flag = 32
+#        3. 人口等于2.0时：flag = 128
+#
+#    ModUpdateRealmPopulation.UpdateFlag = 0
+
+ModUpdateRealmPopulation.UpdateFlag = 0
