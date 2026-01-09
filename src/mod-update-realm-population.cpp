@@ -25,6 +25,7 @@ void ModUpdateRealmPopulation::OnAfterConfigLoad(bool reload)
     _enabled = sConfigMgr->GetOption<bool>("ModUpdateRealmPopulation.Enable", true);
     _updateInterval = sConfigMgr->GetOption<uint32>("ModUpdateRealmPopulation.UpdateInterval", 2); // 分钟
     _usePlayerCount = sConfigMgr->GetOption<bool>("ModUpdateRealmPopulation.UsePlayerCount", false);
+    _updateFlag = sConfigMgr->GetOption<bool>("ModUpdateRealmPopulation.UpdateFlag", false);
     if (reload)
     {
         //LOG_INFO("module", "ModUpdateRealmPopulation: Configuration reloaded.");
