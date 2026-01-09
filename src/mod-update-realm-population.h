@@ -17,6 +17,7 @@ private:
     uint32 _updateInterval;
     bool _enabled;
     bool _usePlayerCount;
+    bool _updateFlag;
 };
 
 #endif // MOD_UPDATE_REALM_POPULATION_H
